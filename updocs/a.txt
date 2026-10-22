@@ -1,0 +1,21 @@
+package main
+
+/*
+ a sample GO file
+ ok
+*/
+
+import (
+	"fmt"
+	"strings"
+)
+
+// the main
+func main() {
+	s := ""
+	if s == "" {
+		var x string
+		x = fmt.Sprintf("ola %d", 2*3)
+		fmt.Println("x is ", strings.ToUpper(x))
+	}
+}

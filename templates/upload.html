@@ -1,0 +1,58 @@
+{{ template "header.html" .}}
+</head>
+<body>
+	<h3>Choose file to Upload</h3>
+
+	<form action="/upload" method="post" enctype="multipart/form-data">
+		<div class="form-group row">
+			<label class="control-label col-sm-2" for="name">Name:</label>
+			<div class="col-sm-8">
+				<input class='form-control' type="text" name="name" placeholder="file desc" value=""/>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-sm-2" for="file">File:</label>
+			<div class="col-sm-8">
+				<input class='form-control' type="file" name="file"/>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<div class="col-sm-offset-2 col-sm-8">
+				<button class='btn btn-primary' type="submit">Upload</button>
+			</div>
+		</div>
+	</form>
+	
+    <p>See files at <a href="/docs">docs</a></p>
+
+<br/><br/>
+<hr/>
+<input id="slider1" type="text" 
+    data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+   &nbsp;&nbsp;
+   <input id="s1tx" type="text" value="14" style="width: 2em" maxLength="2"/>
+
+{{ template "footer.html" .}}
+<script>
+$(function(){
+
+    var mySlider = $("#slider1").bootstrapSlider();
+
+    $("#bt1").click(function() {
+    var val = mySlider.bootstrapSlider('getValue');
+    console.log("slider:" + val);
+    });
+    
+    mySlider.on("slide", function(ev) {
+    $("#s1tx").val(ev.value);
+    });
+
+    $("#s1tx").blur(function() {
+    mySlider.bootstrapSlider('setValue', $(this).val());
+    });
+});
+</script>
+
+</body>
+</html>
