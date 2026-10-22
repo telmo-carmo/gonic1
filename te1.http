@@ -1,6 +1,6 @@
 
 @host1 = http://localhost:5000
-@jwt = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnb25pYzEiLCJzdWIiOiJkZW1vIiwiZXhwIjoxNjc4NzQ1Mjg2LCJpYXQiOjE2Nzg3MzA4ODYsImp0aSI6IjEifQ.ujWgZke_Pwv0TfywqMMj4EObiebi4zixfTvqRV0PN5o
+@jwt = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnb25pYzEiLCJzdWIiOiJkZW1vIiwiZXhwIjoxNzkyNzE5NDE5LCJpYXQiOjE3OTI3MDUwMTksImp0aSI6IjEifQ.hdtrgQADI-V3iMXiU8sbUFmcgQt8uu6OLhRI7PzSG0A
 
 
 ###

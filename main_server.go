@@ -105,9 +105,9 @@ func TokenValid(c *gin.Context) error {
 	bearToken := c.Request.Header.Get("Authorization")
 
 	//normally Authorization: Bearer the_token_xxx
-	strArr := strings.Split(bearToken, " ")
+	strArr := strings.SplitN(bearToken, " ", 2)
 	sjwt := ""
-	if len(strArr) == 2 {
+	if len(strArr) == 2 && strArr[0] == "Bearer" {
 		sjwt = strArr[1]
 	}
 
@@ -124,18 +124,28 @@ func TokenValid(c *gin.Context) error {
 		}
 		return []byte(jwt_secret), nil
 	})
-
+	if token == nil || token.Valid == false {
+		log.Println("[ERROR] auth header not valid token", err)
+		return ErrBadAuth
+	}
 	uIdName := "0;NA"
-	//if rclaims, ok := token.Claims.(jwt.RegisteredClaims); !ok && !token.Valid {
-	if claims, ok := token.Claims.(jwt.MapClaims); !ok && !token.Valid {
+
+	if claims, ok := token.Claims.(jwt.MapClaims); !ok {
 		log.Println("[ERROR] bad auth header token", err)
 		return ErrBadAuth
 	} else {
-		log.Printf("[WARN] JWT Claims: %+v", claims)
+		expTime, err := claims.GetExpirationTime()
+		if err != nil {
+			return fmt.Errorf("Failed to parse token expiration claim")
+		}
+		log.Printf("[WARN] JWT Claims: %+v ; expiresAt: %s",
+			claims,
+			expTime.Time.Format("2006-01-02T15:04:05.999Z")) // .Format(time.RFC3339))
+
 		uIdName = fmt.Sprintf("%s;%s", claims["jti"], claims["sub"])
 		c.Set("uid", uIdName)
-		//log.Printf("[WARN] JWT Claims: %v", rclaims)
-		//uIdName = rclaims.ID + ";" + rclaims.Subject + ";exp:" + rclaims.ExpiresAt.String()
+		//log.Printf("[WARN] JWT Claims: %v", claims)
+		//uIdName = claims.ID + ";" + claims.Subject + ";exp:" + claims.ExpiresAt.String()
 	}
 
 	log.Printf("[INFO] Auth header token OK for: %s", uIdName)
