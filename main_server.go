@@ -101,6 +101,12 @@ func logoutApi(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": "logout!"})
 }
 
+func rndApi(c *gin.Context) {
+	rn := time.Now().UnixNano()
+	log.Printf("[INFO] auth rnd: %d", rn)
+	c.JSON(http.StatusOK, gin.H{"rnd": rn})
+}
+
 func TokenValid(c *gin.Context) error {
 	bearToken := c.Request.Header.Get("Authorization")
 
@@ -237,6 +243,7 @@ func main() {
 
 	r.POST("/auth/login", loginApi)
 	r.GET("/auth/logout", logoutApi)
+	r.GET("/auth/rnd", TokenAuthMiddleware(), rndApi)
 
 	rv1 := r.Group("/api")
 	{

@@ -86,3 +86,7 @@ content-type: application/json
     "uid": "demo",
     "pwd": "123"
 }
+###
+GET {{host1}}/auth/rnd
+
+###
