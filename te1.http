@@ -1,6 +1,6 @@
 
 @host1 = http://localhost:5000
-@jwt = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnb25pYzEiLCJzdWIiOiJkZW1vIiwiZXhwIjoxNzkyNzE5NDE5LCJpYXQiOjE3OTI3MDUwMTksImp0aSI6IjEifQ.hdtrgQADI-V3iMXiU8sbUFmcgQt8uu6OLhRI7PzSG0A
+@jwt = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnb25pYzEiLCJzdWIiOiJkZW1vIiwiZXhwIjoxNzkyNzU5NzM2LCJpYXQiOjE3OTI3NDUzMzYsImp0aSI6IjEifQ.CSQzHqLWEBk2Qe3X94pTnFQ3tUis2hQqcZVr_8Mxm3Q
 
 
 ###
@@ -88,5 +88,6 @@ content-type: application/json
 }
 ###
 GET {{host1}}/auth/rnd
+Authorization: {{jwt}}
 
 ###
