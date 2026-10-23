@@ -103,7 +103,8 @@ func logoutApi(c *gin.Context) {
 
 func rndApi(c *gin.Context) {
 	rn := time.Now().UnixNano()
-	log.Printf("[INFO] auth rnd: %d", rn)
+	uid, _ := c.Get("uid")
+	log.Printf("[INFO] auth rnd: %d uid: %v", rn, uid)
 	c.JSON(http.StatusOK, gin.H{"rnd": rn})
 }
 
@@ -257,7 +258,7 @@ func main() {
 		rv1.GET("/bonus", controllers.GetAllBonus)
 	}
 	rv1p := rv1.Group("/")
-	rv1p.Use(TokenAuthMiddleware())
+	rv1p.Use(TokenAuthMiddleware()) // this group of APIs requires authentication JWT Bearer token
 	{
 
 		rv1p.GET("/bonus/:id", controllers.GetOneBonus)
